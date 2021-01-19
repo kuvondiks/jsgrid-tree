@@ -21,6 +21,16 @@ html, body{
     transform: rotate(90deg);
 }
 
+tr{
+    transition:all ease .4s;
+}
+
+.height-0{
+    height: 0px;
+    transform: scaleY(0);
+    /* display: table-caption; */
+}
+
 .space-block{
     width:20px;
     display: inline-block;

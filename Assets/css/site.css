@@ -13,6 +13,7 @@ html, body{
     transition:transform ease .4s;
 
     height:20px;
+    cursor: pointer;
     margin-right:10px;
 }
 

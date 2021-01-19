@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jsgrid-tree</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+        <link type="text/css" rel="stylesheet" href="Assets/css/site.css"/>
+    </head>
+    <body>
+
+        <div class="main">
+            <div class="wrapper">
+                <div id="treeGrid"></div>
+
+                <table class="table bg-light mt-5 table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Ancestor-->
+                        <tr>
+                            <td><img class="expander expanded" src="Assets/images/right-arrow.svg"/><span>A1</span></td>
+                            <!-- <td>A1</td> -->
+                            <td>B1</td>
+                            <td>C1</td>
+
+                            <!-- Level 1-->
+                            <!-- Child row-->
+                            <tr>
+                                <td>
+                                    <!-- Space x1 -->
+                                    <span class="space-block"></span>
+                                    <img class="expander expanded" src="Assets/images/right-arrow.svg"/>
+                                    <span>A1_1</span>
+                                </td>
+                                <td>B1_1</td>
+                                <td>C1_1</td>
+                                <!-- Level 2-->
+                                <!-- Child row-->
+                                <tr>
+                                    <td>
+                                        <!-- Space x2 -->
+                                        <span class="space-block"></span>
+                                        <span class="space-block"></span>
+                                        <img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/>
+                                        <span>A1_1_1</span>
+                                    </td>
+                                    <td>B1_1_1</td>
+                                    <td>C1_1_1</td>        
+                                </tr>
+                            </tr>
+
+                            <!-- Child row-->
+                            <tr>
+                                <td><img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/><span>A1_2</span></td>
+                                <td>B1_2</td>
+                                <td>C1_2</td>
+                            </tr>
+                        </tr>
+
+                        <tr>
+                            <td><img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/><span>A2</span></td>
+                            <td>B2</td>
+                            <td>C2</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+        <script src="Assets/js/site.js"></script>
+    </body>
+</html>

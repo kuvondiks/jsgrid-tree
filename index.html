@@ -12,9 +12,8 @@
 
         <div class="main">
             <div class="wrapper">
-                <div id="treeGrid"></div>
-
-                <table class="table bg-light mt-5 table-bordered table-striped table-hover">
+                <h4 class="text-light">Example</h4>
+                <table class="table bg-light mb-5 table-bordered table-striped table-hover">
                     <thead>
                         <tr>
                             <th>A</th>
@@ -25,45 +24,45 @@
                     <tbody>
 
                         <!-- Ancestor-->
+                        <!-- Level 0-->
                         <tr>
                             <td><img class="expander expanded" src="Assets/images/right-arrow.svg"/><span>A1</span></td>
                             <!-- <td>A1</td> -->
                             <td>B1</td>
                             <td>C1</td>
                         </tr>
-                            <!-- Level 1-->
+                        <!-- Level 1-->
+                        <!-- Child row-->
+                        <tr>
+                            <td>
+                                <!-- Space x1 -->
+                                <span class="space-block"></span>
+                                <img class="expander expanded" src="Assets/images/right-arrow.svg"/>
+                                <span>A1_1</span>
+                            </td>
+                            <td>B1_1</td>
+                            <td>C1_1</td>
+                            <!-- Level 2-->
                             <!-- Child row-->
                             <tr>
                                 <td>
-                                    <!-- Space x1 -->
+                                    <!-- Space x2 -->
                                     <span class="space-block"></span>
-                                    <img class="expander expanded" src="Assets/images/right-arrow.svg"/>
-                                    <span>A1_1</span>
+                                    <span class="space-block"></span>
+                                    <img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/>
+                                    <span>A1_1_1</span>
                                 </td>
-                                <td>B1_1</td>
-                                <td>C1_1</td>
-                                <!-- Level 2-->
-                                <!-- Child row-->
-                                <tr>
-                                    <td>
-                                        <!-- Space x2 -->
-                                        <span class="space-block"></span>
-                                        <span class="space-block"></span>
-                                        <img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/>
-                                        <span>A1_1_1</span>
-                                    </td>
-                                    <td>B1_1_1</td>
-                                    <td>C1_1_1</td>        
-                                </tr>
+                                <td>B1_1_1</td>
+                                <td>C1_1_1</td>        
                             </tr>
+                        </tr>
 
-                            <!-- Child row-->
-                            <tr>
-                                <td><img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/><span>A1_2</span></td>
-                                <td>B1_2</td>
-                                <td>C1_2</td>
-                            </tr>
-                        
+                        <!-- Child row-->
+                        <tr>
+                            <td><img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/><span>A1_2</span></td>
+                            <td>B1_2</td>
+                            <td>C1_2</td>
+                        </tr>
 
                         <tr>
                             <td><img style="visibility: hidden;" class="expander" src="Assets/images/right-arrow.svg"/><span>A2</span></td>
@@ -72,6 +71,9 @@
                         </tr>
                     </thead>
                 </table>
+
+                <h4 class="text-light">Implementation</h4>
+                <div id="treeGrid"></div>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 html, body{
-    background-color: rgb(0, 0, 75);
+    background-color: rgb(0, 0, 24);
 }
 
 .wrapper{
@@ -23,15 +23,26 @@ html, body{
 
 tr{
     transition:all ease .4s;
+    transform-origin: 50% 0;
+    visibility: visible;
+    opacity: 1;
 }
 
-.height-0{
-    height: 0px;
+td{
+    cursor: auto!important;
+}
+
+.collapsed{
     transform: scaleY(0);
-    /* display: table-caption; */
+    visibility: collapse;
+    opacity: 0;
 }
 
 .space-block{
     width:20px;
     display: inline-block;
 }
+
+.no-click {
+    pointer-events: none;
+} 

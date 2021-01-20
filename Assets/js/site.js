@@ -270,7 +270,7 @@ function createEditContainer(value){
     // Ajax request
     // ...
     
-    editingOff(currEditingTr, oldVal);
+    editingOff(currEditingTr);
     
     e.stopPropagation();
   });

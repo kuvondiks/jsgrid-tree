@@ -2,7 +2,7 @@ var data = [
   {
     id: "1",
     name: "Name1",
-    price:"",
+    price:null,
     children: [
       {
         id: 1,
@@ -36,7 +36,7 @@ var data = [
   {
     id: "2",
     name: "Name2",
-    price:"",
+    price:null,
   },
   {
     id: "3",
@@ -66,7 +66,7 @@ $(document).ready(function () {
   // Tree grid
   $("#treeGrid").jsGrid({
     width: "100%",
-    sorting:true,
+    //sorting:true,
     //editing:true,
     data: data,
     rowRenderer: function (item, itemIndex) {
@@ -86,11 +86,18 @@ $(document).ready(function () {
 
       return $tr;
     },
+    rowClick: function(args){
+      var $tr = $(args.event.currentTarget);
+      
+      if($tr.attr('data-level') == 2){
+        editingOn($tr);
+      }
+    },
     fields: [
       {
         //name: 'name',
         title: 'Id',
-        //visible:false,
+        visible:false,
       },
       {
           //name: 'name',
@@ -104,6 +111,7 @@ $(document).ready(function () {
   });
 });
 
+// Creates rows with sub rows
 function createTreeViewRows(element, childPropName, level = 0) {
   // Ancestor
   var $tr = $('<tr class="jsgrid-row">');
@@ -125,6 +133,12 @@ function createTreeViewRows(element, childPropName, level = 0) {
     for(propName in element){
       if(!Array.isArray(element[propName])){
         var $td = $('<td class="jsgrid-cell">');
+        if(propName == "id"){
+          $td.append($("<span>").append(element[propName]));
+          $td.css('display','none');
+          $tr.append($td)
+          continue;
+        }
 
         if(propIndex == 0){
 
@@ -183,12 +197,19 @@ function createTreeViewRows(element, childPropName, level = 0) {
   } else {
     // Hide expander for rows without children
     $expander.css("visibility", "hidden");
-
+ 
     // Columns
     var propIndex = 0;
     for(propName in element){
       if(!Array.isArray(element[propName])){
         var $td = $('<td class="jsgrid-cell">');
+        if(propName == "id"){
+          $td.append($("<span>").append(element[propName]));
+          $td.css('display','none');
+          $tr.append($td)
+          continue;
+        }
+
         if(propIndex == 0){
   
           // Add space blocks
@@ -220,4 +241,109 @@ function createTreeViewRows(element, childPropName, level = 0) {
   }
 
   return $tr;
+}
+
+// Creates editing container
+function createEditContainer(value){
+  var $div = $('<div class="d-flex">');
+  var $input = $('<input class="form-control edit-input">');
+  $($input).val(value);
+
+  var $submitBtn = $('<button class="btn btn-primary edit-buttons">');
+  $submitBtn.append($('<i>').addClass('fa fa-check'));
+  
+  var $cancelBtn = $('<button class="btn btn-danger edit-buttons">');
+  $cancelBtn.append($('<i>').addClass('fa fa-close'));
+
+  // Cancel button click event handler
+  $cancelBtn.click(function(e){
+    e.preventDefault();
+    editingOff(currEditingTr, oldVal);
+
+    e.stopPropagation();
+  });
+
+   // Submit button click event handler
+   $submitBtn.click(function(e){
+    e.preventDefault();
+    
+    // Ajax request
+    // ...
+    
+    editingOff(currEditingTr, oldVal);
+    
+    e.stopPropagation();
+  });
+
+
+  $div.append($input);
+  $div.append($submitBtn);
+  $div.append($cancelBtn);
+
+  return $div;
+}
+
+// Current editing row
+var currEditingTr = null;
+var oldVal = null;
+
+// Turns off edit mode on a row
+function editingOn(tr){
+  // Checks the current editing row
+  if(currEditingTr && !currEditingTr.is(tr))
+    // Turns off edting mode for a current editing row
+    editingOff(currEditingTr, oldVal);
+
+  // Renew current editing row
+  currEditingTr = tr;
+
+  // If a row is not on edit mode...
+  if(!tr.hasClass('editing')){
+    tr.addClass('editing');
+
+    // Gets columns of the row
+    var $tdArr = $(tr).find('td');
+
+    // We need third column to edit
+    var $targetTd = $($tdArr[2]);
+    
+    // Find the target column of value
+    var $spanArr = $($targetTd.find('span'));
+    var value = $($spanArr[0]).text();
+    
+    oldVal = value;
+    
+    // Clear value to show
+    $spanArr.remove();
+    
+    // Append edit container for the column
+    $targetTd.append(createEditContainer(value));
+  }
+}
+
+// Turns on edit mode on a row
+function editingOff(tr, val){
+  if(tr.hasClass('editing')){
+    tr.removeClass('editing');
+
+    // Gets columns of the row
+    var $tdArr = $(tr).find('td');
+
+    // We need third column
+    var $targetTd = $($tdArr[2]);
+
+    // Find the edited column of value
+    var $divArr = $($targetTd.find('div'));
+    var $inputArr = $($targetTd.find('input'));
+    var value = $($inputArr[0]).val();
+
+    // Clear edit container
+    $divArr.remove();
+    
+    // Append value to show for the column
+    if(val && val != "")
+      $targetTd.append($('<span>').text(val));
+    else
+      $targetTd.append($('<span>').text(value));
+  }
 }
